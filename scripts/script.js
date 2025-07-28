@@ -1,7 +1,8 @@
 let mainImage = document.querySelector("#mainImage");
 let imageCaption = document.querySelector(".textCon");
 let changeImageBtn = document.querySelector("#changeImageBtn");
-let anilistData
+let refreshDataBtn = document.querySelector("#refreshDataBtn");
+let anilistData;
 
 // changeImageBtn.addEventListener("click", function () {
 //     if (mainImage.getAttribute('src') === "./images/sun.jfif") {
@@ -20,9 +21,28 @@ let anilistData
 changeImageBtn.addEventListener("click", function () {
     let userInput = parseInt(prompt("Enter an anime ID"));
     searchAnimeByID(userInput);
-    
+});
+
+refreshDataBtn.addEventListener("click", function () {
+    printAniData();
+    imageCaption.textContent = anilistData.data.Media.title.romaji;
 })
 
+function handleResponse(response) {
+    return response.json().then(function (json) {
+        return response.ok ? json : Promise.reject(json);
+    });
+}
+
+function handleData(data) {
+    console.log(data);
+    anilistData = data;
+}
+
+function handleError(error) {
+    alert('Error, check console');
+    console.error(error);
+}
 
 function searchAnimeByID (id) {
     // Here we define our query as a multi-line string
@@ -63,23 +83,6 @@ function searchAnimeByID (id) {
     fetch(url, options).then(handleResponse)
         .then(handleData)
         .catch(handleError);
-
-    function handleResponse(response) {
-        return response.json().then(function (json) {
-            return response.ok ? json : Promise.reject(json);
-        });
-    }
-
-    function handleData(data) {
-        console.log(data);
-        anilistData = data;
-        printAniData();
-    }
-
-    function handleError(error) {
-        alert('Error, check console');
-        console.error(error);
-    }
 }
 
 function printAniData() {

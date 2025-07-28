@@ -1,6 +1,6 @@
-* {
+/* * {
     border: solid red 1px;
-}
+} */
 
 head, body {
     margin: 0;
@@ -25,6 +25,12 @@ body {
     height: 50%;
     width: 50%;
     flex: 1;
+}
+
+#btnList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .imageCon {
