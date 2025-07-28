@@ -42,3 +42,7 @@ body {
 .textCon {
     text-align: center;
 }
+
+.seasonCon {
+    display: flex;
+}
