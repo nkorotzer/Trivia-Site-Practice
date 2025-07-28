@@ -6,20 +6,6 @@ let seasonText = document.querySelector(".season");
 let seasonYearText = document.querySelector(".seasonYear");
 let anilistData;
 
-// changeImageBtn.addEventListener("click", function () {
-//     if (mainImage.getAttribute('src') === "./images/sun.jfif") {
-//         mainImage.setAttribute('src', "./images/fez.jfif");
-//         mainImage.setAttribute('alt', "A fez");
-//         imageCaption.textContent = "A fez";
-//     }
-//     else {
-//         mainImage.setAttribute('src', "./images/sun.jfif");
-//         mainImage.setAttribute('alt', "A sun hat");
-//         imageCaption.textContent = "A sun hat";
-//     }
-// })
-
-
 changeImageBtn.addEventListener("click", function () {
     let userInput = parseInt(prompt("Enter an anime ID"));
     searchAnimeByID(userInput);
