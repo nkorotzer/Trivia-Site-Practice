@@ -94,3 +94,14 @@ function printAniData() {
     console.log("anilist title = ", anilistData.data.Media.title.romaji);
 }
 
+const gridDiv = document.querySelectorAll("#newStuff > div");
+console.log(gridDiv);
+for (let i = 0; i < gridDiv.length; i++) {
+    gridDiv[i].addEventListener("click", searchAndRefresh);
+    gridDiv[i].addEventListener("mouseenter", function (e) {
+        e.target.style.backgroundColor = "gray";
+    });
+    gridDiv[i].addEventListener("mouseleave", function (e) {
+        e.target.style.backgroundColor = "white";
+    });
+}
