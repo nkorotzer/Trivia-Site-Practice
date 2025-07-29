@@ -6,18 +6,22 @@ let seasonText = document.querySelector(".season");
 let seasonYearText = document.querySelector(".seasonYear");
 let anilistData;
 
-changeImageBtn.addEventListener("click", function () {
+changeImageBtn.addEventListener("click", async function () {
     let userInput = parseInt(prompt("Enter an anime ID"));
-    searchAnimeByID(userInput);
+    searchAnimeByID(userInput).then( () => {
+        refreshData();
+    });
 });
 
-refreshDataBtn.addEventListener("click", function () {
+refreshDataBtn.addEventListener("click", refreshData);
+
+function refreshData() {
     printAniData();
     imageCaption.textContent = anilistData.data.Media.title.romaji;
     mainImage.setAttribute('src', anilistData.data.Media.coverImage.medium);
     seasonText.textContent = anilistData.data.Media.season;
     seasonYearText.textContent = anilistData.data.Media.seasonYear;
-})
+}
 
 function handleResponse(response) {
     return response.json().then(function (json) {
@@ -35,7 +39,7 @@ function handleError(error) {
     console.error(error);
 }
 
-function searchAnimeByID (id) {
+async function searchAnimeByID (id) {
     // Here we define our query as a multi-line string
     // Storing it in a separate .graphql/.gql file is also possible
     var query = `
@@ -74,9 +78,9 @@ function searchAnimeByID (id) {
                 variables: variables
             })
         };
-
+    
     // Make the HTTP Api request
-    fetch(url, options).then(handleResponse)
+    await fetch(url, options).then(handleResponse)
         .then(handleData)
         .catch(handleError);
 }
