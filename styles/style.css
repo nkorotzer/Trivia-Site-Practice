@@ -19,6 +19,15 @@ html, body {
     width: 70%;
     height: 70%;
     border: solid black 1px;
+
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px;
+    gap: 2px;
+}
+
+#newStuff > div {
+    border: solid blue 1px;
 }
 
 /* #changeImageBtn {
