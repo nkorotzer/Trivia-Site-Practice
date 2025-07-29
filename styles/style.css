@@ -2,15 +2,23 @@
     border: solid red 1px;
 } */
 
-head, body {
+html, body {
     margin: 0;
     height: 100%;
+    
 }
 
-body {
+#oldStuff {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#newStuff {
+    margin: 50px auto;
+    width: 70%;
+    height: 70%;
+    border: solid black 1px;
 }
 
 /* #changeImageBtn {
