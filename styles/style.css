@@ -22,8 +22,8 @@ html, body {
     background-color: lightgray;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 100px repeat(3, 1fr);
+    grid-template-rows: 100px repeat(3, 1fr);
     gap: 2px;
     overflow: auto;
 }
