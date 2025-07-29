@@ -19,15 +19,26 @@ html, body {
     width: 70%;
     height: 70%;
     border: solid black 1px;
+    background-color: lightgray;
 
     display: grid;
-    grid-template-columns: 50px 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px 50px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 2px;
+    overflow: auto;
 }
 
 #newStuff > div {
     border: solid blue 1px;
+    /* width: fit-content;
+    height: fit-content;
+    box-sizing: border-box; */
+}
+
+#newStuff > div > img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
 }
 
 /* #changeImageBtn {
