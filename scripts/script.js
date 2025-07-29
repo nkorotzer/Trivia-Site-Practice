@@ -6,14 +6,16 @@ let seasonText = document.querySelector(".season");
 let seasonYearText = document.querySelector(".seasonYear");
 let anilistData;
 
-changeImageBtn.addEventListener("click", function () {
+changeImageBtn.addEventListener("click", searchAndRefresh);
+
+refreshDataBtn.addEventListener("click", refreshData);
+
+function searchAndRefresh() {
     let userInput = parseInt(prompt("Enter an anime ID"));
     searchAnimeByID(userInput).then( () => {
         refreshData();
     });
-});
-
-refreshDataBtn.addEventListener("click", refreshData);
+}
 
 function refreshData() {
     printAniData();
@@ -91,3 +93,4 @@ function printAniData() {
     console.log("anilist id = ", anilistData.data.Media.id);
     console.log("anilist title = ", anilistData.data.Media.title.romaji);
 }
+
