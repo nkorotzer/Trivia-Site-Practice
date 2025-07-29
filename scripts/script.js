@@ -71,6 +71,8 @@ function printAniData() {
 
 function searchAndRefreshHere(place) {
     let userInput = parseInt(prompt("Enter an anime ID"));
+    if (!userInput)
+        return
     searchAnimeByID(userInput).then( () => {
         refreshDataHere(place);
     });
