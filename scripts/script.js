@@ -6,7 +6,7 @@ let seasonText = document.querySelector(".season");
 let seasonYearText = document.querySelector(".seasonYear");
 let anilistData;
 
-changeImageBtn.addEventListener("click", async function () {
+changeImageBtn.addEventListener("click", function () {
     let userInput = parseInt(prompt("Enter an anime ID"));
     searchAnimeByID(userInput).then( () => {
         refreshData();
