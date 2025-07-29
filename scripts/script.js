@@ -118,7 +118,7 @@ function refreshDataHere(place) {
     divAniImage.setAttribute('src', place.dataset.coverImage);
 }
 
-const gridDivs = document.querySelectorAll("#newStuff > div");
+const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 for (let i = 0; i < gridDivs.length; i++) {
     gridDivs[i].addEventListener("click", function (e) {
         searchAndRefreshHere(e.currentTarget);
