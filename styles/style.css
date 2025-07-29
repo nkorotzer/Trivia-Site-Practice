@@ -28,7 +28,7 @@ html, body {
     overflow: auto;
 }
 
-#newStuff > div {
+#newStuff > .imgSquare {
     border: solid blue 1px;
     /* width: fit-content;
     height: fit-content;
