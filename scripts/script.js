@@ -94,34 +94,34 @@ function printAniData() {
     console.log("anilist title = ", anilistData.data.Media.title.romaji);
 }
 
-function searchAndRefreshHere(e) {
+function searchAndRefreshHere(place) {
     let userInput = parseInt(prompt("Enter an anime ID"));
     searchAnimeByID(userInput).then( () => {
-        refreshDataHere(e);
+        refreshDataHere(place);
     });
 }
 
-function refreshDataHere(e) {
-    const divAniName = e.target.querySelector(".aniName");
-    const divAniSeason = e.target.querySelector(".aniSeason");
-    const divAniSeasonYear = e.target.querySelector(".aniSeasonYear");
-    const divAniImage = e.target.querySelector(".aniImage");
+function refreshDataHere(place) {
+    const divAniName = place.querySelector(".aniName");
+    const divAniSeason = place.querySelector(".aniSeason");
+    const divAniSeasonYear = place.querySelector(".aniSeasonYear");
+    const divAniImage = place.querySelector(".aniImage");
 
-    e.target.dataset.name = anilistData.data.Media.title.romaji;
-    e.target.dataset.season = anilistData.data.Media.season;
-    e.target.dataset.seasonYear = anilistData.data.Media.seasonYear;
-    e.target.dataset.coverImage = anilistData.data.Media.coverImage.medium;
+    place.dataset.name = anilistData.data.Media.title.romaji;
+    place.dataset.season = anilistData.data.Media.season;
+    place.dataset.seasonYear = anilistData.data.Media.seasonYear;
+    place.dataset.coverImage = anilistData.data.Media.coverImage.medium;
 
-    divAniName.textContent = e.target.dataset.name;
-    divAniSeason.textContent = e.target.dataset.season;
-    divAniSeasonYear.textContent = e.target.dataset.seasonYear;
-    divAniImage.setAttribute('src', e.target.dataset.coverImage);
+    divAniName.textContent = place.dataset.name;
+    divAniSeason.textContent = place.dataset.season;
+    divAniSeasonYear.textContent = place.dataset.seasonYear;
+    divAniImage.setAttribute('src', place.dataset.coverImage);
 }
 
 const gridDivs = document.querySelectorAll("#newStuff > div");
 for (let i = 0; i < gridDivs.length; i++) {
     gridDivs[i].addEventListener("click", function (e) {
-        searchAndRefreshHere(e);
+        searchAndRefreshHere(e.currentTarget);
     });
 
     gridDivs[i].addEventListener("mouseenter", function (e) {
