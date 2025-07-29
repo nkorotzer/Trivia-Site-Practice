@@ -49,7 +49,7 @@ async function searchAnimeByID (id) {
         Media (id: $id, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
             id
             coverImage {
-                medium
+                large
             }
             title {
             romaji
@@ -102,19 +102,19 @@ function searchAndRefreshHere(place) {
 }
 
 function refreshDataHere(place) {
-    const divAniName = place.querySelector(".aniName");
-    const divAniSeason = place.querySelector(".aniSeason");
-    const divAniSeasonYear = place.querySelector(".aniSeasonYear");
+    // const divAniName = place.querySelector(".aniName");
+    // const divAniSeason = place.querySelector(".aniSeason");
+    // const divAniSeasonYear = place.querySelector(".aniSeasonYear");
     const divAniImage = place.querySelector(".aniImage");
 
-    place.dataset.name = anilistData.data.Media.title.romaji;
-    place.dataset.season = anilistData.data.Media.season;
-    place.dataset.seasonYear = anilistData.data.Media.seasonYear;
-    place.dataset.coverImage = anilistData.data.Media.coverImage.medium;
+    // place.dataset.name = anilistData.data.Media.title.romaji;
+    // place.dataset.season = anilistData.data.Media.season;
+    // place.dataset.seasonYear = anilistData.data.Media.seasonYear;
+    place.dataset.coverImage = anilistData.data.Media.coverImage.large;
 
-    divAniName.textContent = place.dataset.name;
-    divAniSeason.textContent = place.dataset.season;
-    divAniSeasonYear.textContent = place.dataset.seasonYear;
+    // divAniName.textContent = place.dataset.name;
+    // divAniSeason.textContent = place.dataset.season;
+    // divAniSeasonYear.textContent = place.dataset.seasonYear;
     divAniImage.setAttribute('src', place.dataset.coverImage);
 }
 
@@ -132,18 +132,18 @@ for (let i = 0; i < gridDivs.length; i++) {
         e.target.style.backgroundColor = "white";
     });
 
-    const divAniName = document.createElement("p");
-    const divAniSeason = document.createElement("p");
-    const divAniSeasonYear = document.createElement("p");
+    // const divAniName = document.createElement("p");
+    // const divAniSeason = document.createElement("p");
+    // const divAniSeasonYear = document.createElement("p");
     const divAniImage = document.createElement("img");
 
-    divAniName.classList.add("aniName");
-    divAniSeason.classList.add("aniSeason");
-    divAniSeasonYear.classList.add("aniSeasonYear");
+    // divAniName.classList.add("aniName");
+    // divAniSeason.classList.add("aniSeason");
+    // divAniSeasonYear.classList.add("aniSeasonYear");
     divAniImage.classList.add("aniImage");
 
     gridDivs[i].appendChild(divAniImage);
-    gridDivs[i].appendChild(divAniName);
-    gridDivs[i].appendChild(divAniSeason);
-    gridDivs[i].appendChild(divAniSeasonYear);
+    // gridDivs[i].appendChild(divAniName);
+    // gridDivs[i].appendChild(divAniSeason);
+    // gridDivs[i].appendChild(divAniSeasonYear);
 }
