@@ -94,14 +94,56 @@ function printAniData() {
     console.log("anilist title = ", anilistData.data.Media.title.romaji);
 }
 
-const gridDiv = document.querySelectorAll("#newStuff > div");
-console.log(gridDiv);
-for (let i = 0; i < gridDiv.length; i++) {
-    gridDiv[i].addEventListener("click", searchAndRefresh);
-    gridDiv[i].addEventListener("mouseenter", function (e) {
+function searchAndRefreshHere(e) {
+    let userInput = parseInt(prompt("Enter an anime ID"));
+    searchAnimeByID(userInput).then( () => {
+        refreshDataHere(e);
+    });
+}
+
+function refreshDataHere(e) {
+    const divAniName = e.target.querySelector(".aniName");
+    const divAniSeason = e.target.querySelector(".aniSeason");
+    const divAniSeasonYear = e.target.querySelector(".aniSeasonYear");
+    const divAniImage = e.target.querySelector(".aniImage");
+
+    e.target.dataset.name = anilistData.data.Media.title.romaji;
+    e.target.dataset.season = anilistData.data.Media.seasonYear;
+    e.target.dataset.seasonYear = anilistData.data.Media.season;
+    e.target.dataset.coverImage = anilistData.data.Media.coverImage.medium;
+
+    divAniName.textContent = e.target.dataset.name;
+    divAniSeason.textContent = e.target.dataset.season;
+    divAniSeasonYear.textContent = e.target.dataset.seasonYear;
+    divAniImage.setAttribute('src', e.target.dataset.coverImage);
+}
+
+const gridDivs = document.querySelectorAll("#newStuff > div");
+for (let i = 0; i < gridDivs.length; i++) {
+    gridDivs[i].addEventListener("click", function (e) {
+        searchAndRefreshHere(e);
+    });
+
+    gridDivs[i].addEventListener("mouseenter", function (e) {
         e.target.style.backgroundColor = "gray";
     });
-    gridDiv[i].addEventListener("mouseleave", function (e) {
+
+    gridDivs[i].addEventListener("mouseleave", function (e) {
         e.target.style.backgroundColor = "white";
     });
+
+    const divAniName = document.createElement("p");
+    const divAniSeason = document.createElement("p");
+    const divAniSeasonYear = document.createElement("p");
+    const divAniImage = document.createElement("img");
+
+    divAniName.classList.add("aniName");
+    divAniSeason.classList.add("aniSeason");
+    divAniSeasonYear.classList.add("aniSeasonYear");
+    divAniImage.classList.add("aniImage");
+
+    gridDivs[i].appendChild(divAniImage);
+    gridDivs[i].appendChild(divAniName);
+    gridDivs[i].appendChild(divAniSeason);
+    gridDivs[i].appendChild(divAniSeasonYear);
 }
