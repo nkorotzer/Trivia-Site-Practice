@@ -108,8 +108,8 @@ function refreshDataHere(e) {
     const divAniImage = e.target.querySelector(".aniImage");
 
     e.target.dataset.name = anilistData.data.Media.title.romaji;
-    e.target.dataset.season = anilistData.data.Media.seasonYear;
-    e.target.dataset.seasonYear = anilistData.data.Media.season;
+    e.target.dataset.season = anilistData.data.Media.season;
+    e.target.dataset.seasonYear = anilistData.data.Media.seasonYear;
     e.target.dataset.coverImage = anilistData.data.Media.coverImage.medium;
 
     divAniName.textContent = e.target.dataset.name;
