@@ -1,29 +1,4 @@
-let mainImage = document.querySelector("#mainImage");
-let imageCaption = document.querySelector(".textCon");
-let changeImageBtn = document.querySelector("#changeImageBtn");
-let refreshDataBtn = document.querySelector("#refreshDataBtn");
-let seasonText = document.querySelector(".season");
-let seasonYearText = document.querySelector(".seasonYear");
 let anilistData;
-
-changeImageBtn.addEventListener("click", searchAndRefresh);
-
-refreshDataBtn.addEventListener("click", refreshData);
-
-function searchAndRefresh() {
-    let userInput = parseInt(prompt("Enter an anime ID"));
-    searchAnimeByID(userInput).then( () => {
-        refreshData();
-    });
-}
-
-function refreshData() {
-    printAniData();
-    imageCaption.textContent = anilistData.data.Media.title.romaji;
-    mainImage.setAttribute('src', anilistData.data.Media.coverImage.medium);
-    seasonText.textContent = anilistData.data.Media.season;
-    seasonYearText.textContent = anilistData.data.Media.seasonYear;
-}
 
 function handleResponse(response) {
     return response.json().then(function (json) {
