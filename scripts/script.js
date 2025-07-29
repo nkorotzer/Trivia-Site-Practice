@@ -40,19 +40,19 @@ function searchAnimeByID (id) {
     // Storing it in a separate .graphql/.gql file is also possible
     var query = `
     query ($id: Int) { # Define which variables will be used in the query (id)
-    Media (id: $id, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
-        id
-        coverImage {
-            medium
+        Media (id: $id, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
+            id
+            coverImage {
+                medium
+            }
+            title {
+            romaji
+            english
+            native
+            }
+            season
+            seasonYear
         }
-        title {
-        romaji
-        english
-        native
-        }
-        season
-        seasonYear
-    }
     }
     `;
 
