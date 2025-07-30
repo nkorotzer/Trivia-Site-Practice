@@ -16,14 +16,15 @@ html, body {
 
 #newStuff {
     margin: 50px auto;
-    width: 70%;
+    /* width: 70%; */
     height: 70%;
+    aspect-ratio: 1 / 1;
     border: solid black 1px;
     background-color: lightgray;
 
     display: grid;
-    grid-template-columns: 100px repeat(3, 1fr);
-    grid-template-rows: 100px repeat(3, 1fr);
+    grid-template-columns: 50px repeat(3, 1fr);
+    grid-template-rows: 50px repeat(3, 1fr);
     gap: 2px;
     overflow: auto;
 }
@@ -39,7 +40,7 @@ html, body {
 
 #newStuff > div > img {
     object-fit: fill;
-    max-height: 100px;
+    max-height: 150px;
 }
 
 .colLabel, .rowLabel, .corner{
