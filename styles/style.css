@@ -30,7 +30,6 @@ html, body {
 }
 
 #newStuff > .imgSquare {
-    border: solid blue 1px;
     background-color: white;
     padding: 5px;
     display: flex;
