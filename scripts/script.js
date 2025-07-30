@@ -185,6 +185,7 @@ searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {   
         searchAnimeByString(e.target.value).then( () => {
             printPageMedia(aniPageMedia);
+            displaySearchResults(aniPageMedia);
         })
     }
 })
@@ -193,5 +194,25 @@ function printPageMedia(media) {
     console.log(media);
     for (let i = 0; i < media.length; i++) {
         console.log(media[i].title);
+    }
+}
+
+function displaySearchResults (media) {
+    const searchResultsDiv = document.querySelector("#searchResults");
+    for (let i = 0; i < media.length; i++) {
+        const aniDisplay = document.createElement("div");
+        const aniImg = document.createElement("img");
+        const aniName = document.createElement("p");
+
+        aniImg.setAttribute('src', media[i].coverImage.large);
+        aniName.textContent = media[i].title.romaji;
+
+        aniDisplay.appendChild(aniImg);
+        aniDisplay.appendChild(aniName);
+
+        aniDisplay.style.display = "flex";
+        aniDisplay.style.flexDirection = "column";
+
+        searchResultsDiv.appendChild(aniDisplay);
     }
 }
