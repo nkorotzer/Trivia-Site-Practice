@@ -1,4 +1,5 @@
 let anilistData;
+let aniPageMedia;
 
 function handleResponse(response) {
     return response.json().then(function (json) {
@@ -9,6 +10,11 @@ function handleResponse(response) {
 function handleData(data) {
     console.log(data);
     anilistData = data;
+}
+
+function handlePageData(data) {
+    console.log(data);
+    aniPageMedia = data.data.Page.media;
 }
 
 function handleError(error) {
@@ -123,4 +129,69 @@ for (let i = 0; i < gridDivs.length; i++) {
     // gridDivs[i].appendChild(divAniName);
     // gridDivs[i].appendChild(divAniSeason);
     // gridDivs[i].appendChild(divAniSeasonYear);
+}
+
+const searchField = document.querySelector("#searchField");
+
+async function searchAnimeByString (input) {
+    // Here we define our query as a multi-line string
+    // Storing it in a separate .graphql/.gql file is also possible
+    var query = `
+    query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+    Page (page: $page, perPage: $perPage) {
+        pageInfo {
+        currentPage
+        hasNextPage
+        perPage
+        }
+        media (id: $id, search: $search, type: ANIME) {
+            id
+            title {
+                romaji
+            }
+            coverImage {
+                large
+            }
+        }
+    }
+    }
+    `;
+
+    var variables = {
+        search: input,
+        page: 1,
+        perPage: 3
+    };
+
+    var url = 'https://graphql.anilist.co',
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: variables
+            })
+        };
+
+    await fetch(url, options).then(handleResponse)
+        .then(handlePageData)
+        .catch(handleError);
+}
+
+searchField.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {   
+        searchAnimeByString(e.target.value).then( () => {
+            printPageMedia(aniPageMedia);
+        })
+    }
+})
+
+function printPageMedia(media) {
+    console.log(media);
+    for (let i = 0; i < media.length; i++) {
+        console.log(media[i].title);
+    }
 }
