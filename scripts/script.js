@@ -160,7 +160,7 @@ async function searchAnimeByString (input) {
     var variables = {
         search: input,
         page: 1,
-        perPage: 3
+        perPage: 10
     };
 
     var url = 'https://graphql.anilist.co',
