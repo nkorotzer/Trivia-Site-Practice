@@ -183,6 +183,7 @@ async function searchAnimeByString (input) {
 
 searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {   
+        eraseSearchResults();
         searchAnimeByString(e.target.value).then( () => {
             printPageMedia(aniPageMedia);
             displaySearchResults(aniPageMedia);
@@ -212,7 +213,15 @@ function displaySearchResults (media) {
 
         aniDisplay.style.display = "flex";
         aniDisplay.style.flexDirection = "column";
+        aniDisplay.style.flex = "1";
 
         searchResultsDiv.appendChild(aniDisplay);
+    }
+}
+
+function eraseSearchResults() {
+    const searchResultsDiv = document.querySelector("#searchResults");
+    while (searchResultsDiv.firstChild) {
+        searchResultsDiv.removeChild(searchResultsDiv.firstChild);
     }
 }
