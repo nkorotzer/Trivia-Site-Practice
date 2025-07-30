@@ -206,7 +206,10 @@ function displaySearchResults (media) {
         const aniName = document.createElement("p");
 
         aniImg.setAttribute('src', media[i].coverImage.large);
+        aniImg.style.height = "100px";
+        aniImg.style.objectFit = "scale-down";
         aniName.textContent = media[i].title.romaji;
+        aniName.style.textAlign = "center";
 
         aniDisplay.appendChild(aniImg);
         aniDisplay.appendChild(aniName);
@@ -214,6 +217,7 @@ function displaySearchResults (media) {
         aniDisplay.style.display = "flex";
         aniDisplay.style.flexDirection = "column";
         aniDisplay.style.flex = "1";
+        aniDisplay.style.alignItems = "center";
 
         searchResultsDiv.appendChild(aniDisplay);
     }

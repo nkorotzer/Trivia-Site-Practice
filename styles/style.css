@@ -16,6 +16,7 @@ html, body {
 
 #searchResults {
     display: flex;
+    padding: 10px;
 }
 
 #newStuff {
