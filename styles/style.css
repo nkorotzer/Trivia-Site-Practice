@@ -14,7 +14,7 @@ html, body {
     justify-content: center;
 }
 
-#pageSearchBox {
+.pageSearchBox {
     position: relative;
 }
 

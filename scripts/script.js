@@ -199,7 +199,7 @@ function printPageMedia(media) {
 
 function displaySearchResults (media) {
     eraseSearchResults();
-    const pageSearchBox = document.querySelector("#pageSearchBox");
+    const pageSearchBox = document.querySelector(".pageSearchBox");
     const searchResultsDiv = document.createElement("div");
     searchResultsDiv.id = "searchResults";
     searchResultsDiv.classList.add("dropdown");
@@ -243,7 +243,7 @@ function eraseSearchResults() {
     }
 }
 
-const pageSearchBox = document.querySelector("#pageSearchBox");
+const pageSearchBox = document.querySelector(".pageSearchBox");
 
 pageSearchBox.addEventListener("focusin", function() {
     if (document.querySelector("#searchResults")) {
