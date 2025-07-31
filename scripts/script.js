@@ -68,6 +68,54 @@ async function searchAnimeByID (id) {
         .catch(handleError);
 }
 
+async function searchAnimeByString (input) {
+    // Here we define our query as a multi-line string
+    // Storing it in a separate .graphql/.gql file is also possible
+    var query = `
+    query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+    Page (page: $page, perPage: $perPage) {
+        pageInfo {
+        currentPage
+        hasNextPage
+        perPage
+        }
+        media (id: $id, search: $search, type: ANIME) {
+            id
+            title {
+                romaji
+            }
+            coverImage {
+                large
+            }
+        }
+    }
+    }
+    `;
+
+    var variables = {
+        search: input,
+        page: 1,
+        perPage: 10
+    };
+
+    var url = 'https://graphql.anilist.co',
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: variables
+            })
+        };
+
+    await fetch(url, options).then(handleResponse)
+        .then(handlePageData)
+        .catch(handleError);
+}
+
 function printAniData() {
     console.log("anilist data = ", anilistData.data);
     console.log("anilist media = ", anilistData.data.Media);
@@ -132,54 +180,6 @@ for (let i = 0; i < gridDivs.length; i++) {
 }
 
 const searchField = document.querySelector("#searchField");
-
-async function searchAnimeByString (input) {
-    // Here we define our query as a multi-line string
-    // Storing it in a separate .graphql/.gql file is also possible
-    var query = `
-    query ($id: Int, $page: Int, $perPage: Int, $search: String) {
-    Page (page: $page, perPage: $perPage) {
-        pageInfo {
-        currentPage
-        hasNextPage
-        perPage
-        }
-        media (id: $id, search: $search, type: ANIME) {
-            id
-            title {
-                romaji
-            }
-            coverImage {
-                large
-            }
-        }
-    }
-    }
-    `;
-
-    var variables = {
-        search: input,
-        page: 1,
-        perPage: 10
-    };
-
-    var url = 'https://graphql.anilist.co',
-        options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                query: query,
-                variables: variables
-            })
-        };
-
-    await fetch(url, options).then(handleResponse)
-        .then(handlePageData)
-        .catch(handleError);
-}
 
 searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
