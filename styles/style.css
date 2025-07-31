@@ -25,6 +25,7 @@ html, body {
     background-color: aliceblue;
     overflow-y: auto;
     height: 300px;
+    width: 250px;
 }
 
 .dropdown {
@@ -37,7 +38,6 @@ html, body {
 
 .dropdownItem {
     display: flex;
-    flex-direction: column;
     align-items: center;
     flex: 1;
 }
