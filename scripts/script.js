@@ -218,6 +218,14 @@ function displaySearchResults (media) {
 
         aniDisplay.classList.add("dropdownItem");
 
+        aniDisplay.addEventListener("mouseenter", function (e) {
+            e.target.style.backgroundColor = "gray";
+        });
+        aniDisplay.addEventListener("mouseleave", function (e) {
+            e.target.style.backgroundColor = "transparent";
+            console.log("yo");
+        });
+
         searchResultsDiv.appendChild(aniDisplay);
     }
 }
