@@ -223,7 +223,6 @@ function displaySearchResults (media) {
         });
         aniDisplay.addEventListener("mouseleave", function (e) {
             e.target.style.backgroundColor = "transparent";
-            console.log("yo");
         });
 
         searchResultsDiv.appendChild(aniDisplay);
