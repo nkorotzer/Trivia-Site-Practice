@@ -47,6 +47,10 @@ html, body {
     object-fit: scale-down;
 }
 
+.dropdownItem > p {
+    text-align: center;
+}
+
 #newStuff {
     margin: 50px auto;
     /* width: 70%; */

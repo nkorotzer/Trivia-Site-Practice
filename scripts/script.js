@@ -212,7 +212,6 @@ function displaySearchResults (media) {
 
         aniImg.setAttribute('src', media[i].coverImage.large);
         aniName.textContent = media[i].title.romaji;
-        aniName.style.textAlign = "center";
 
         aniDisplay.appendChild(aniImg);
         aniDisplay.appendChild(aniName);
