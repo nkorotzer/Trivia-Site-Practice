@@ -183,7 +183,6 @@ async function searchAnimeByString (input) {
 
 searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
-        eraseSearchResults();
         searchAnimeByString(e.target.value).then( () => {
             printPageMedia(aniPageMedia);
             displaySearchResults(aniPageMedia);
@@ -199,7 +198,13 @@ function printPageMedia(media) {
 }
 
 function displaySearchResults (media) {
-    const searchResultsDiv = document.querySelector("#searchResults");
+    eraseSearchResults();
+    const pageSearchBox = document.querySelector("#pageSearchBox");
+    const searchResultsDiv = document.createElement("div");
+    searchResultsDiv.id = "searchResults";
+    searchResultsDiv.classList.add("dropdown");
+    pageSearchBox.appendChild(searchResultsDiv);
+
     for (let i = 0; i < media.length; i++) {
         const aniDisplay = document.createElement("div");
         const aniImg = document.createElement("img");
@@ -224,8 +229,11 @@ function displaySearchResults (media) {
 }
 
 function eraseSearchResults() {
-    const searchResultsDiv = document.querySelector("#searchResults");
-    while (searchResultsDiv.firstChild) {
-        searchResultsDiv.removeChild(searchResultsDiv.firstChild);
+    if (document.querySelector("#searchResults")) {
+        const searchResultsDiv = document.querySelector("#searchResults");
+        while (searchResultsDiv.firstChild) {
+            searchResultsDiv.removeChild(searchResultsDiv.firstChild);
+        }
+        searchResultsDiv.remove();
     }
 }
