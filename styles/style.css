@@ -23,6 +23,8 @@ html, body {
     flex-direction: column;
     padding: 10px;
     background-color: aliceblue;
+    overflow-y: auto;
+    height: 300px;
 }
 
 .dropdown {
