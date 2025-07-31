@@ -207,11 +207,22 @@ function displaySearchResults (media) {
     }
 }
 
+function TESTcheckStudioMatch (studioList) {
+    const row = activeGrid.dataset.row;
+    const rowLabel = getRowLabel(parseInt(row)).textContent;
+
+    for (let i = 0; i < studioList.length; i++) {
+        if (rowLabel === studioList[i].name)
+            return true;
+    }
+    return false;
+}
+
 function displayChoiceInGrid (e) {
     console.log("Choice = ", e.currentTarget);
     const divAniImage = activeGrid.querySelector(".aniImage");
     Object.assign(activeGrid.dataset, e.currentTarget.dataset);
-    // console.log(JSON.parse(activeGrid.dataset.studios));
+    console.log(TESTcheckStudioMatch(JSON.parse(activeGrid.dataset.studios)));
     divAniImage.setAttribute('src', activeGrid.dataset.coverImage);
 }
 
