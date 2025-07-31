@@ -42,6 +42,11 @@ html, body {
     flex: 1;
 }
 
+.dropdownItem > img {
+    height: 100px;
+    object-fit: scale-down;
+}
+
 #newStuff {
     margin: 50px auto;
     /* width: 70%; */
