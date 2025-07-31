@@ -16,6 +16,7 @@ html, body {
 
 .pageSearchBox {
     position: relative;
+    visibility: hidden;
 }
 
 #searchResults {
