@@ -188,11 +188,19 @@ function displaySearchResults (media) {
         });
         
         aniDisplay.addEventListener("mousedown", function (e) {
-            console.log(e.currentTarget.querySelector("p").textContent);
+            displayChoiceInGrid(e);
         });
 
         searchResultsDiv.appendChild(aniDisplay);
     }
+}
+
+function displayChoiceInGrid (e) {
+    console.log("Choice = ", e.currentTarget);
+    let choiceImgSrc = e.currentTarget.querySelector("img").src;
+    const divAniImage = activeGrid.querySelector(".aniImage");
+    activeGrid.dataset.coverImage = choiceImgSrc;
+    divAniImage.setAttribute('src', activeGrid.dataset.coverImage);
 }
 
 function eraseSearchResults() {
@@ -244,7 +252,10 @@ searchField.addEventListener("keyup", function (e) {
     }
 })
 
+let activeGrid;
+
 function getUserInputHere (e) {
+    activeGrid = e.currentTarget;
     showSearchBox();
 }
 
