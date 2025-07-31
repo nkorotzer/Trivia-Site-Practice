@@ -87,6 +87,13 @@ async function searchAnimeByString (input) {
             coverImage {
                 large
             }
+            season
+            seasonYear
+            studios {
+                nodes {
+                    name
+                }
+            }
         }
     }
     }
@@ -180,6 +187,11 @@ function displaySearchResults (media) {
 
         aniDisplay.classList.add("dropdownItem");
 
+        aniDisplay.dataset.coverImage = media[i].coverImage.large;
+        aniDisplay.dataset.seasonYear = media[i].seasonYear;
+        aniDisplay.dataset.season = media[i].season;
+        aniDisplay.dataset.studios = JSON.stringify(media[i].studios.nodes);
+
         aniDisplay.addEventListener("mouseenter", function (e) {
             e.target.style.backgroundColor = "gray";
         });
@@ -197,9 +209,9 @@ function displaySearchResults (media) {
 
 function displayChoiceInGrid (e) {
     console.log("Choice = ", e.currentTarget);
-    let choiceImgSrc = e.currentTarget.querySelector("img").src;
     const divAniImage = activeGrid.querySelector(".aniImage");
-    activeGrid.dataset.coverImage = choiceImgSrc;
+    Object.assign(activeGrid.dataset, e.currentTarget.dataset);
+    // console.log(JSON.parse(activeGrid.dataset.studios));
     divAniImage.setAttribute('src', activeGrid.dataset.coverImage);
 }
 
@@ -279,7 +291,7 @@ function getUserInputHere (e) {
     console.log("coords = (", row, ", ", col, ")");
     const rowLabel = getRowLabel(parseInt(row));
     const colLabel = getColLabel(parseInt(col));
-    console.log(rowLabel, colLabel); 
+    console.log(rowLabel.textContent);
     showSearchBox();
 }
 
