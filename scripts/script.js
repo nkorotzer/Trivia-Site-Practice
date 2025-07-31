@@ -149,6 +149,7 @@ function refreshDataHere(place) {
     divAniImage.setAttribute('src', place.dataset.coverImage);
 }
 
+// Logs media object contents to console
 function printPageMedia(media) {
     console.log(media);
     for (let i = 0; i < media.length; i++) {
@@ -156,6 +157,8 @@ function printPageMedia(media) {
     }
 }
 
+
+// Creats DOM elements to display contents of media object
 function displaySearchResults (media) {
     eraseSearchResults();
     const pageSearchBox = document.querySelector(".pageSearchBox");
