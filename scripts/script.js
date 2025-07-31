@@ -201,29 +201,53 @@ function displaySearchResults (media) {
         
         aniDisplay.addEventListener("mousedown", function (e) {
             displayChoiceInGrid(e);
+            displayResult();
         });
 
         searchResultsDiv.appendChild(aniDisplay);
     }
 }
 
-function TESTcheckStudioMatch (studioList) {
+function displayResult () {
+    let correct = checkChoiceCorrectness(activeGrid.dataset.studios, activeGrid.dataset.seasonYear);
+    if (correct) {
+        activeGrid.style.backgroundColor = "green";
+    }
+    else {
+        activeGrid.style.backgroundColor = "red";
+    }
+}
+
+function checkChoiceCorrectness (studios, year) {
+    let correctStudio = false;
+    let correctYear = false;
+
+    const studioList = JSON.parse(studios);
     const row = activeGrid.dataset.row;
+    const col = activeGrid.dataset.col;
     const rowLabel = getRowLabel(parseInt(row)).textContent;
+    const colLabel = getColLabel(parseInt(col)).textContent;
 
     for (let i = 0; i < studioList.length; i++) {
-        if (rowLabel === studioList[i].name)
-            return true;
+        if (studioList[i].name === rowLabel)
+            correctStudio = true;
     }
-    return false;
+
+    if (year === colLabel)
+        correctYear = true;
+
+    return correctStudio & correctYear;
 }
 
 function displayChoiceInGrid (e) {
     console.log("Choice = ", e.currentTarget);
     const divAniImage = activeGrid.querySelector(".aniImage");
+
     Object.assign(activeGrid.dataset, e.currentTarget.dataset);
-    console.log(TESTcheckStudioMatch(JSON.parse(activeGrid.dataset.studios)));
+
     divAniImage.setAttribute('src', activeGrid.dataset.coverImage);
+
+    console.log(checkChoiceCorrectness(activeGrid.dataset.studios, activeGrid.dataset.seasonYear));
 }
 
 function eraseSearchResults() {
@@ -303,6 +327,7 @@ function getUserInputHere (e) {
     const rowLabel = getRowLabel(parseInt(row));
     const colLabel = getColLabel(parseInt(col));
     console.log(rowLabel.textContent);
+    console.log(colLabel.textContent);
     showSearchBox();
 }
 
