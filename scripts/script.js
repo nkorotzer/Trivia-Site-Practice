@@ -182,7 +182,7 @@ async function searchAnimeByString (input) {
 }
 
 searchField.addEventListener("keyup", function (e) {
-    if (e.key === "Enter") {   
+    if (e.key === "Enter") {
         eraseSearchResults();
         searchAnimeByString(e.target.value).then( () => {
             printPageMedia(aniPageMedia);
