@@ -224,6 +224,10 @@ function displaySearchResults (media) {
         aniDisplay.addEventListener("mouseleave", function (e) {
             e.target.style.backgroundColor = "transparent";
         });
+        
+        aniDisplay.addEventListener("mousedown", function (e) {
+            console.log(e.currentTarget.querySelector("p").textContent);
+        });
 
         searchResultsDiv.appendChild(aniDisplay);
     }
