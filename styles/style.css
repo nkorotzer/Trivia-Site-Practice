@@ -14,9 +14,23 @@ html, body {
     justify-content: center;
 }
 
+#pageSearchBox {
+    position: relative;
+}
+
 #searchResults {
     display: flex;
     padding: 10px;
+}
+
+.dropdown {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border: solid pink 3px;
+    z-index: 1;
+    top: 15;
+    left: 15;
 }
 
 #newStuff {
