@@ -149,47 +149,6 @@ function refreshDataHere(place) {
     divAniImage.setAttribute('src', place.dataset.coverImage);
 }
 
-const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
-for (let i = 0; i < gridDivs.length; i++) {
-    gridDivs[i].addEventListener("click", function (e) {
-        searchAndRefreshHere(e.currentTarget);
-    });
-
-    gridDivs[i].addEventListener("mouseenter", function (e) {
-        e.target.style.backgroundColor = "gray";
-    });
-
-    gridDivs[i].addEventListener("mouseleave", function (e) {
-        e.target.style.backgroundColor = "white";
-    });
-
-    // const divAniName = document.createElement("p");
-    // const divAniSeason = document.createElement("p");
-    // const divAniSeasonYear = document.createElement("p");
-    const divAniImage = document.createElement("img");
-
-    // divAniName.classList.add("aniName");
-    // divAniSeason.classList.add("aniSeason");
-    // divAniSeasonYear.classList.add("aniSeasonYear");
-    divAniImage.classList.add("aniImage");
-
-    gridDivs[i].appendChild(divAniImage);
-    // gridDivs[i].appendChild(divAniName);
-    // gridDivs[i].appendChild(divAniSeason);
-    // gridDivs[i].appendChild(divAniSeasonYear);
-}
-
-const searchField = document.querySelector("#searchField");
-
-searchField.addEventListener("keyup", function (e) {
-    if (e.key === "Enter") {
-        searchAnimeByString(e.target.value).then( () => {
-            printPageMedia(aniPageMedia);
-            displaySearchResults(aniPageMedia);
-        })
-    }
-})
-
 function printPageMedia(media) {
     console.log(media);
     for (let i = 0; i < media.length; i++) {
@@ -244,6 +203,8 @@ function eraseSearchResults() {
 }
 
 const pageSearchBox = document.querySelector(".pageSearchBox");
+const searchField = document.querySelector("#searchField");
+const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
 pageSearchBox.addEventListener("focusin", function() {
     if (document.querySelector("#searchResults")) {
@@ -258,3 +219,41 @@ pageSearchBox.addEventListener("focusout", function() {
         searchResultsDiv.style.display = "none";   
     }
 });
+
+searchField.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
+        searchAnimeByString(e.target.value).then( () => {
+            printPageMedia(aniPageMedia);
+            displaySearchResults(aniPageMedia);
+        })
+    }
+})
+
+for (let i = 0; i < gridDivs.length; i++) {
+    gridDivs[i].addEventListener("click", function (e) {
+        searchAndRefreshHere(e.currentTarget);
+    });
+
+    gridDivs[i].addEventListener("mouseenter", function (e) {
+        e.target.style.backgroundColor = "gray";
+    });
+
+    gridDivs[i].addEventListener("mouseleave", function (e) {
+        e.target.style.backgroundColor = "white";
+    });
+
+    // const divAniName = document.createElement("p");
+    // const divAniSeason = document.createElement("p");
+    // const divAniSeasonYear = document.createElement("p");
+    const divAniImage = document.createElement("img");
+
+    // divAniName.classList.add("aniName");
+    // divAniSeason.classList.add("aniSeason");
+    // divAniSeasonYear.classList.add("aniSeasonYear");
+    divAniImage.classList.add("aniImage");
+
+    gridDivs[i].appendChild(divAniImage);
+    // gridDivs[i].appendChild(divAniName);
+    // gridDivs[i].appendChild(divAniSeason);
+    // gridDivs[i].appendChild(divAniSeasonYear);
+}
