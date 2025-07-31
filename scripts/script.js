@@ -206,19 +206,31 @@ const pageSearchBox = document.querySelector(".pageSearchBox");
 const searchField = document.querySelector("#searchField");
 const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
-pageSearchBox.addEventListener("focusin", function() {
+function showSearchResults () {
     if (document.querySelector("#searchResults")) {
         const searchResultsDiv = document.querySelector("#searchResults");
         searchResultsDiv.style.display = "flex";
     }
-});
+}
 
-pageSearchBox.addEventListener("focusout", function() {
+function hideSearchResults () {
     if (document.querySelector("#searchResults")) {
         const searchResultsDiv = document.querySelector("#searchResults");
-        searchResultsDiv.style.display = "none";   
+        searchResultsDiv.style.display = "none";
     }
-});
+}
+
+function showSearchBox () {
+    pageSearchBox.style.visibility = "visible";
+    searchField.focus();
+}
+
+function hideSearchBox () {
+    pageSearchBox.style.visibility = "hidden";
+}
+
+pageSearchBox.addEventListener("focusin", showSearchBox);
+pageSearchBox.addEventListener("focusout", hideSearchBox);
 
 searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
@@ -229,9 +241,13 @@ searchField.addEventListener("keyup", function (e) {
     }
 })
 
+function getUserInputHere (e) {
+    showSearchBox();
+}
+
 for (let i = 0; i < gridDivs.length; i++) {
     gridDivs[i].addEventListener("click", function (e) {
-        searchAndRefreshHere(e.currentTarget);
+        getUserInputHere(e);
     });
 
     gridDivs[i].addEventListener("mouseenter", function (e) {
