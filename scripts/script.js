@@ -254,8 +254,32 @@ searchField.addEventListener("keyup", function (e) {
 
 let activeGrid;
 
+function getRowLabel (row) {
+    if (row === 1)
+        return document.querySelector(".rowLabel.row1");
+    else if (row === 2)
+        return document.querySelector(".rowLabel.row2");
+    else
+        return document.querySelector(".rowLabel.row3");
+}
+
+function getColLabel (col) {
+    if (col === 1)
+        return document.querySelector(".colLabel.col1");
+    else if (col === 2)
+        return document.querySelector(".colLabel.col2");
+    else
+        return document.querySelector(".colLabel.col3");
+}
+
 function getUserInputHere (e) {
     activeGrid = e.currentTarget;
+    const row = activeGrid.dataset.row;
+    const col = activeGrid.dataset.col;
+    console.log("coords = (", row, ", ", col, ")");
+    const rowLabel = getRowLabel(parseInt(row));
+    const colLabel = getColLabel(parseInt(col));
+    console.log(rowLabel, colLabel); 
     showSearchBox();
 }
 
