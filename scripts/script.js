@@ -238,3 +238,19 @@ function eraseSearchResults() {
         searchResultsDiv.remove();
     }
 }
+
+const pageSearchBox = document.querySelector("#pageSearchBox");
+
+pageSearchBox.addEventListener("focusin", function() {
+    if (document.querySelector("#searchResults")) {
+        const searchResultsDiv = document.querySelector("#searchResults");
+        searchResultsDiv.style.display = "flex";
+    }
+});
+
+pageSearchBox.addEventListener("focusout", function() {
+    if (document.querySelector("#searchResults")) {
+        const searchResultsDiv = document.querySelector("#searchResults");
+        searchResultsDiv.style.display = "none";   
+    }
+});
