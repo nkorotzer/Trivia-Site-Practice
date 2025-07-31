@@ -219,10 +219,7 @@ function displaySearchResults (media) {
         aniDisplay.appendChild(aniImg);
         aniDisplay.appendChild(aniName);
 
-        aniDisplay.style.display = "flex";
-        aniDisplay.style.flexDirection = "column";
-        aniDisplay.style.flex = "1";
-        aniDisplay.style.alignItems = "center";
+        aniDisplay.classList.add("dropdownItem");
 
         searchResultsDiv.appendChild(aniDisplay);
     }

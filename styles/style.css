@@ -35,6 +35,13 @@ html, body {
     left: 15;
 }
 
+.dropdownItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
 #newStuff {
     margin: 50px auto;
     /* width: 70%; */
