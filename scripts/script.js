@@ -216,6 +216,8 @@ function displayResult () {
     else {
         activeGrid.style.backgroundColor = "red";
     }
+    let newGrid = activeGrid.cloneNode(true);
+    activeGrid.parentNode.replaceChild(newGrid, activeGrid);
 }
 
 function checkChoiceCorrectness (studios, year) {
