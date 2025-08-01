@@ -324,13 +324,6 @@ function getColLabel (col) {
 
 function getUserInputHere (e) {
     activeGrid = e.currentTarget;
-    const row = activeGrid.dataset.row;
-    const col = activeGrid.dataset.col;
-    console.log("coords = (", row, ", ", col, ")");
-    const rowLabel = getRowLabel(parseInt(row));
-    const colLabel = getColLabel(parseInt(col));
-    console.log(rowLabel.textContent);
-    console.log(colLabel.textContent);
     showSearchBox();
 }
 
