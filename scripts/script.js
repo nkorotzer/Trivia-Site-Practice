@@ -216,6 +216,9 @@ function displayResult () {
     else {
         activeGrid.style.backgroundColor = "red";
     }
+
+    // cloning activeGrid node removes all event listeners
+    // this prevents the user from changing their choice
     let newGrid = activeGrid.cloneNode(true);
     activeGrid.parentNode.replaceChild(newGrid, activeGrid);
 }
