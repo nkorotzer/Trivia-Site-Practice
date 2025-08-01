@@ -3,7 +3,6 @@ let aniPageMedia;
 let activeGrid;
 const pageSearchBox = document.querySelector(".pageSearchBox");
 const searchField = document.querySelector("#searchField");
-const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
 function handleResponse(response) {
     return response.json().then(function (json) {
@@ -327,7 +326,10 @@ function getUserInputHere (e) {
     showSearchBox();
 }
 
-function createGrid () {
+function createGridItems () {
+    console.log("creating...");
+    const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
+
     for (let i = 0; i < gridDivs.length; i++) {
         gridDivs[i].addEventListener("click", function (e) {
             getUserInputHere(e);
@@ -346,5 +348,28 @@ function createGrid () {
         divAniImage.classList.add("aniImage");
 
         gridDivs[i].appendChild(divAniImage);
+        gridDivs[i].style.backgroundColor = "white";
     }
 }
+
+function deleteGridItems () {
+    console.log("deleting");
+    const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
+
+    for (let i = 0; i < gridDivs.length; i++) {
+        while (gridDivs[i].firstChild) {
+            gridDivs[i].removeChild(gridDivs[i].firstChild);
+        }
+    }
+}
+
+function resetGridItems () {
+    console.log("reseting...");
+    deleteGridItems();
+    createGridItems();
+}
+
+const resetBtn = document.querySelector("#resetBtn");
+resetBtn.addEventListener("click", resetGridItems);
+
+createGridItems();
