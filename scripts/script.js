@@ -384,3 +384,14 @@ pageSearchBox.addEventListener("focusin", showSearchBox);
 pageSearchBox.addEventListener("focusout", hideSearchBox);
 
 createGridItems();
+
+function updateUrl () {
+    const currentUrl = new URL(window.location);
+    console.log(currentUrl);
+    currentUrl.searchParams.set('row1', getRowLabel(1).textContent)
+    location.assign(currentUrl);
+}
+
+
+const urlBtn = document.querySelector("#urlBtn");
+urlBtn.addEventListener("click", updateUrl);
