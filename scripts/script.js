@@ -385,13 +385,39 @@ pageSearchBox.addEventListener("focusout", hideSearchBox);
 
 createGridItems();
 
-function updateUrl () {
-    const currentUrl = new URL(window.location);
-    console.log(currentUrl);
-    currentUrl.searchParams.set('row1', getRowLabel(1).textContent)
-    location.assign(currentUrl);
+const pageUrl = new URL(window.location)
+
+function updateUrl (paramName, paramVal) {
+    pageUrl.searchParams.append(paramName, paramVal)
+    history.pushState({}, "", pageUrl);
+    console.log(pageUrl);
+}
+
+function clearAllUrlParams () {
+    // trying to use URLSearchParams wasn't working, but this does
+    pageUrl.search = "";
+}
+
+function TESTaddRowLabelsToUrl () {
+    const rowLabels = document.querySelectorAll("#newStuff > .rowLabel");
+    for (let i = 0; i < rowLabels.length; i++) {
+        updateUrl("row", rowLabels[i].textContent);
+    }
+}
+
+function TESTaddColLabelstoUrl () {
+    const colLabels = document.querySelectorAll("#newStuff > .colLabel");
+    for (let i = 0; i < colLabels.length; i++) {
+        updateUrl("col", colLabels[i].textContent);
+    }
+}
+
+function TESTaddLabelsToUrl () {
+    clearAllUrlParams();
+    TESTaddRowLabelsToUrl();
+    TESTaddColLabelstoUrl();
 }
 
 
 const urlBtn = document.querySelector("#urlBtn");
-urlBtn.addEventListener("click", updateUrl);
+urlBtn.addEventListener("click", TESTaddLabelsToUrl);
