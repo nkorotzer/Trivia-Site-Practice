@@ -1,5 +1,9 @@
 let anilistData;
 let aniPageMedia;
+let activeGrid;
+const pageSearchBox = document.querySelector(".pageSearchBox");
+const searchField = document.querySelector("#searchField");
+const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
 function handleResponse(response) {
     return response.json().then(function (json) {
@@ -164,7 +168,6 @@ function printPageMedia(media) {
     }
 }
 
-
 // Creats DOM elements to display contents of media object
 function displaySearchResults (media) {
     eraseSearchResults();
@@ -265,10 +268,6 @@ function eraseSearchResults() {
     }
 }
 
-const pageSearchBox = document.querySelector(".pageSearchBox");
-const searchField = document.querySelector("#searchField");
-const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
-
 function showSearchResults () {
     if (document.querySelector("#searchResults")) {
         const searchResultsDiv = document.querySelector("#searchResults");
@@ -304,8 +303,6 @@ searchField.addEventListener("keyup", function (e) {
         })
     }
 })
-
-let activeGrid;
 
 function getRowLabel (row) {
     if (row === 1)
