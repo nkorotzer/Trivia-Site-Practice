@@ -334,31 +334,24 @@ function getUserInputHere (e) {
     showSearchBox();
 }
 
-for (let i = 0; i < gridDivs.length; i++) {
-    gridDivs[i].addEventListener("click", function (e) {
-        getUserInputHere(e);
-    });
+function createGrid () {
+    for (let i = 0; i < gridDivs.length; i++) {
+        gridDivs[i].addEventListener("click", function (e) {
+            getUserInputHere(e);
+        });
 
-    gridDivs[i].addEventListener("mouseenter", function (e) {
-        e.target.style.backgroundColor = "gray";
-    });
+        gridDivs[i].addEventListener("mouseenter", function (e) {
+            e.target.style.backgroundColor = "gray";
+        });
 
-    gridDivs[i].addEventListener("mouseleave", function (e) {
-        e.target.style.backgroundColor = "white";
-    });
+        gridDivs[i].addEventListener("mouseleave", function (e) {
+            e.target.style.backgroundColor = "white";
+        });
 
-    // const divAniName = document.createElement("p");
-    // const divAniSeason = document.createElement("p");
-    // const divAniSeasonYear = document.createElement("p");
-    const divAniImage = document.createElement("img");
+        const divAniImage = document.createElement("img");
 
-    // divAniName.classList.add("aniName");
-    // divAniSeason.classList.add("aniSeason");
-    // divAniSeasonYear.classList.add("aniSeasonYear");
-    divAniImage.classList.add("aniImage");
+        divAniImage.classList.add("aniImage");
 
-    gridDivs[i].appendChild(divAniImage);
-    // gridDivs[i].appendChild(divAniName);
-    // gridDivs[i].appendChild(divAniSeason);
-    // gridDivs[i].appendChild(divAniSeasonYear);
+        gridDivs[i].appendChild(divAniImage);
+    }
 }
