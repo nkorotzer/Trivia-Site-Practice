@@ -282,6 +282,7 @@ function hideSearchResults () {
 
 function showSearchBox () {
     pageSearchBox.style.visibility = "visible";
+    searchField.value = "";
     searchField.focus();
 }
 
