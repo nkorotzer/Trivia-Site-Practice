@@ -4,27 +4,32 @@ let activeGrid;
 const pageSearchBox = document.querySelector(".pageSearchBox");
 const searchField = document.querySelector("#searchField");
 
+// Only called by searchAnimeByString
 function handleResponse(response) {
     return response.json().then(function (json) {
         return response.ok ? json : Promise.reject(json);
     });
 }
 
+// Unused function called by searchAnimeByID
 function handleData(data) {
     console.log(data);
     anilistData = data;
 }
 
+// Only called by searchAnimeByString
 function handlePageData(data) {
     console.log(data);
     aniPageMedia = data.data.Page.media;
 }
 
+// Only called by searchAnimeByString
 function handleError(error) {
     alert('Error, check console');
     console.error(error);
 }
 
+// Unused function that queries Anilist API with a specific ID number
 async function searchAnimeByID (id) {
     // Here we define our query as a multi-line string
     // Storing it in a separate .graphql/.gql file is also possible
@@ -71,6 +76,10 @@ async function searchAnimeByID (id) {
         .catch(handleError);
 }
 
+// Function that builds and sends API request to Anilist
+// Takes in a string to search for anime titles
+// Returned data is a page of results from Anilist
+// Calls handleResponse, handlePageData, and handleError as needed
 async function searchAnimeByString (input) {
     // Here we define our query as a multi-line string
     // Storing it in a separate .graphql/.gql file is also possible
@@ -126,6 +135,7 @@ async function searchAnimeByString (input) {
         .catch(handleError);
 }
 
+// Unused function for printing the results from the Anilist API to console
 function printAniData() {
     console.log("anilist data = ", anilistData.data);
     console.log("anilist media = ", anilistData.data.Media);
@@ -133,6 +143,7 @@ function printAniData() {
     console.log("anilist title = ", anilistData.data.Media.title.romaji);
 }
 
+// Unused function to search for an anime by its ID
 function searchAndRefreshHere(place) {
     let userInput = parseInt(prompt("Enter an anime ID"));
     if (!userInput)
@@ -142,6 +153,7 @@ function searchAndRefreshHere(place) {
     });
 }
 
+// Unused function to display data in the provided element (should be an imgSquare in the grid)
 function refreshDataHere(place) {
     // const divAniName = place.querySelector(".aniName");
     // const divAniSeason = place.querySelector(".aniSeason");
@@ -291,9 +303,9 @@ function hideSearchBox () {
     pageSearchBox.style.visibility = "hidden";
 }
 
-pageSearchBox.addEventListener("focusin", showSearchBox);
-pageSearchBox.addEventListener("focusout", hideSearchBox);
-
+// Grabs user input in searchField, then passes it to searchAnimeByString
+// The results returned from the Anilist API are printed to console
+// then, they're displayed as a list in the searchResults box
 searchField.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
         searchAnimeByString(e.target.value).then( () => {
@@ -327,7 +339,6 @@ function getUserInputHere (e) {
 }
 
 function createGridItems () {
-    console.log("creating...");
     const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
     for (let i = 0; i < gridDivs.length; i++) {
@@ -353,7 +364,6 @@ function createGridItems () {
 }
 
 function deleteGridItems () {
-    console.log("deleting");
     const gridDivs = document.querySelectorAll("#newStuff > .imgSquare");
 
     for (let i = 0; i < gridDivs.length; i++) {
@@ -364,12 +374,13 @@ function deleteGridItems () {
 }
 
 function resetGridItems () {
-    console.log("reseting...");
     deleteGridItems();
     createGridItems();
 }
 
 const resetBtn = document.querySelector("#resetBtn");
 resetBtn.addEventListener("click", resetGridItems);
+pageSearchBox.addEventListener("focusin", showSearchBox);
+pageSearchBox.addEventListener("focusout", hideSearchBox);
 
 createGridItems();
