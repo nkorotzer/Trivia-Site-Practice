@@ -476,3 +476,12 @@ function TESTaddLabelsToUrl () {
 
 const urlBtn = document.querySelector("#urlBtn");
 urlBtn.addEventListener("click", TESTaddLabelsToUrl);
+
+const labels = document.querySelectorAll(".colLabel, .rowLabel");
+for (let i = 0; i < labels.length; i++) {
+    labels[i].addEventListener("click", function (e) {
+        let userInput = prompt("Enter new value");
+        if (userInput)
+            e.currentTarget.textContent = userInput;
+    });
+}
