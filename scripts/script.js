@@ -1,5 +1,6 @@
 let anilistData;
 let aniPageMedia;
+let studioSearchData;
 let activeGrid;
 const pageSearchBox = document.querySelector(".pageSearchBox");
 const searchField = document.querySelector("#searchField");
@@ -21,6 +22,12 @@ function handleData(data) {
 function handlePageData(data) {
     console.log(data);
     aniPageMedia = data.data.Page.media;
+}
+
+// Only called by searchStudioByString
+function handleStudioData(data) {
+    console.log("studio data = ", data.data.Page.studios);
+    studioSearchData = data.data.Page.studios;
 }
 
 // Only called by searchAnimeByString
@@ -132,6 +139,54 @@ async function searchAnimeByString (input) {
 
     await fetch(url, options).then(handleResponse)
         .then(handlePageData)
+        .catch(handleError);
+}
+
+const studioBtn = document.querySelector("#studioBtn");
+studioBtn.addEventListener("click", function () {
+    let input = prompt("Enter studio name");
+    searchStudioByString(input);
+})
+
+async function searchStudioByString (input) {
+    // Here we define our query as a multi-line string
+    // Storing it in a separate .graphql/.gql file is also possible
+    var query = `
+    query ($page: Int, $perPage: Int, $search: String) {
+        Page (page: $page, perPage: $perPage) {
+            pageInfo {
+                currentPage
+                hasNextPage
+                perPage
+            }
+            studios(search: $search) {
+                name
+            }
+        }
+    }
+    `;
+
+    var variables = {
+        search: input,
+        page: 1,
+        perPage: 10
+    };
+
+    var url = 'https://graphql.anilist.co',
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: variables
+            })
+        };
+
+    await fetch(url, options).then(handleResponse)
+        .then(handleStudioData)
         .catch(handleError);
 }
 
