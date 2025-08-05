@@ -477,11 +477,26 @@ function TESTaddLabelsToUrl () {
 const urlBtn = document.querySelector("#urlBtn");
 urlBtn.addEventListener("click", TESTaddLabelsToUrl);
 
+// Given a string and DOM element (a row/col label element), search anilist for the
+// a studio with the given string name, and set it as the label textContent 
+function searchAndSetStudioName (userInput, place) {
+    searchStudioByString(userInput).then( () => {
+        if (studioSearchData.length !== 0) {
+            console.log(studioSearchData[0].name)
+            console.log(place)
+            place.textContent = studioSearchData[0].name;
+        }
+        else
+            window.alert("Couldn't find a studio called \'" + userInput + "\'.");
+    });
+}
+
 const labels = document.querySelectorAll(".colLabel, .rowLabel");
 for (let i = 0; i < labels.length; i++) {
     labels[i].addEventListener("click", function (e) {
         let userInput = prompt("Enter new value");
-        if (userInput)
-            e.currentTarget.textContent = userInput;
+        if (userInput) {
+            searchAndSetStudioName(userInput, e.currentTarget);
+        }       
     });
 }
