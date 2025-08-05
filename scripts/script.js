@@ -471,26 +471,77 @@ function TESTaddLabelsToUrl () {
 const urlBtn = document.querySelector("#urlBtn");
 urlBtn.addEventListener("click", TESTaddLabelsToUrl);
 
-// Given a string and DOM element (a row/col label element), search anilist for the
-// a studio with the given string name, and set it as the label textContent 
-function searchAndSetStudioName (userInput, place) {
-    searchStudioByString(userInput).then( () => {
-        if (studioSearchData.length !== 0) {
-            console.log(studioSearchData[0].name)
-            console.log(place)
-            place.textContent = studioSearchData[0].name;
-        }
-        else
-            window.alert("Couldn't find a studio called \'" + userInput + "\'.");
+// Given a DOM element (a row or col label element), get user input, then search
+// anilist for a studio with the given name, and set the label text content 
+function setLabelStudio (labelElem) {
+    let userInput = prompt("Enter new value");
+    if (userInput) {  
+        searchStudioByString(userInput).then( () => {
+            if (studioSearchData.length !== 0) {
+                console.log(studioSearchData[0].name)
+                console.log(labelElem)
+                labelElem.textContent = studioSearchData[0].name;
+            }
+            else
+                window.alert("Couldn't find a studio called \'" + userInput + "\'.");
+        });
+    }
+}
+
+function setLabelYear (labelElem) {
+    const userInput = prompt("Enter year");
+    labelElem.textContent = userInput;
+}
+
+function addHoverHighlighting (elem) {
+    elem.addEventListener("mouseenter", function (e) {
+        e.target.style.backgroundColor = "lightgray";
+    });
+
+    elem.addEventListener("mouseleave", function (e) {
+        e.target.style.backgroundColor = "transparent";
     });
 }
 
 const labels = document.querySelectorAll(".colLabel, .rowLabel");
 for (let i = 0; i < labels.length; i++) {
     labels[i].addEventListener("click", function (e) {
-        let userInput = prompt("Enter new value");
-        if (userInput) {
-            searchAndSetStudioName(userInput, e.currentTarget);
-        }       
+            const labelSelectContainer = document.createElement("ul");
+            const labelSelectStudio = document.createElement("li");
+            const labelSelectYear = document.createElement("li");
+
+            labelSelectStudio.textContent = "Studio";
+            labelSelectStudio.style.backgroundColor = "transparent";
+            addHoverHighlighting(labelSelectStudio);
+
+            labelSelectYear.textContent = "Year";
+            labelSelectYear.style.backgroundColor = "transparent";
+            addHoverHighlighting(labelSelectYear);
+
+            labelSelectContainer.style.position = "absolute";
+            labelSelectContainer.style.zIndex = "1";
+            labelSelectContainer.style.border = "solid black 1px";
+            labelSelectContainer.style.backgroundColor = "white";
+            labelSelectContainer.style.top = "15";
+            labelSelectContainer.classList.add("selectCon");
+
+            labelSelectStudio.addEventListener("click", function (e) {
+                setLabelStudio(e.currentTarget.parentNode.parentNode);
+            });
+
+            labelSelectYear.addEventListener("click", function (e) {
+                setLabelYear(e.currentTarget.parentNode.parentNode);
+            });
+
+            labelSelectContainer.appendChild(labelSelectStudio);
+            labelSelectContainer.appendChild(labelSelectYear);
+            
+            labels[i].appendChild(labelSelectContainer);
+    });
+
+    labels[i].addEventListener("mouseleave", function (e) {
+        const selectCon = e.target.querySelector(".selectCon");
+        if (selectCon)
+            e.target.removeChild(selectCon);
     });
 }
