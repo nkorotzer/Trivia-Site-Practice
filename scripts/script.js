@@ -486,12 +486,14 @@ function setLabelStudio (labelElem) {
                 window.alert("Couldn't find a studio called \'" + userInput + "\'.");
         });
     }
+    refreshUrl();
 }
 
 function setLabelYear (labelElem) {
     const userInput = prompt("Enter year");
     if (userInput)
         labelElem.textContent = userInput;
+    refreshUrl();
 }
 
 function addHoverHighlighting (elem) {
