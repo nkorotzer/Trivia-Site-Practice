@@ -297,11 +297,11 @@ function checkChoiceCorrectness (studios, year) {
     const colLabel = getColLabel(parseInt(col)).textContent;
 
     for (let i = 0; i < studioList.length; i++) {
-        if (studioList[i].name === rowLabel)
+        if (studioList[i].name === rowLabel || studioList[i].name === colLabel)
             correctStudio = true;
     }
 
-    if (year === colLabel)
+    if (year === colLabel || year === rowLabel)
         correctYear = true;
 
     return correctStudio & correctYear;
