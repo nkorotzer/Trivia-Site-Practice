@@ -501,9 +501,6 @@ function setLabelsFromUrl () {
     }
 }
 
-const urlBtn = document.querySelector("#urlBtn");
-urlBtn.addEventListener("click", setLabelsFromUrl);
-
 // Given a DOM element (a row or col label element), get user input, then search
 // anilist for a studio with the given name, and set the label text content 
 function setLabelStudio (labelElem) {
