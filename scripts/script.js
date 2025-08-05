@@ -436,7 +436,7 @@ createGridItems();
 
 const pageUrl = new URL(window.location)
 
-function updateUrl (paramName, paramVal) {
+function addUrlParam (paramName, paramVal) {
     pageUrl.searchParams.append(paramName, paramVal)
     history.pushState({}, "", pageUrl);
     console.log(pageUrl);
@@ -447,29 +447,29 @@ function clearAllUrlParams () {
     pageUrl.search = "";
 }
 
-function TESTaddRowLabelsToUrl () {
+function addRowLabelsToUrl () {
     const rowLabels = document.querySelectorAll("#newStuff > .rowLabel");
     for (let i = 0; i < rowLabels.length; i++) {
-        updateUrl("row", rowLabels[i].textContent);
+        addUrlParam("row", rowLabels[i].textContent);
     }
 }
 
-function TESTaddColLabelstoUrl () {
+function addColLabelstoUrl () {
     const colLabels = document.querySelectorAll("#newStuff > .colLabel");
     for (let i = 0; i < colLabels.length; i++) {
-        updateUrl("col", colLabels[i].textContent);
+        addUrlParam("col", colLabels[i].textContent);
     }
 }
 
-function TESTaddLabelsToUrl () {
+function refreshUrl () {
     clearAllUrlParams();
-    TESTaddRowLabelsToUrl();
-    TESTaddColLabelstoUrl();
+    addRowLabelsToUrl();
+    addColLabelstoUrl();
 }
 
 
 const urlBtn = document.querySelector("#urlBtn");
-urlBtn.addEventListener("click", TESTaddLabelsToUrl);
+urlBtn.addEventListener("click", refreshUrl);
 
 // Given a DOM element (a row or col label element), get user input, then search
 // anilist for a studio with the given name, and set the label text content 
