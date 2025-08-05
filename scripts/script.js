@@ -369,6 +369,8 @@ function getRowLabel (row) {
         return document.querySelector(".rowLabel.row1");
     else if (row === 2)
         return document.querySelector(".rowLabel.row2");
+    else if (row === 3)
+        return document.querySelector(".rowLabel.row3");
     else
         return document.querySelector(".rowLabel.row3");
 }
@@ -378,6 +380,8 @@ function getColLabel (col) {
         return document.querySelector(".colLabel.col1");
     else if (col === 2)
         return document.querySelector(".colLabel.col2");
+    else if (col === 3)
+        return document.querySelector(".colLabel.col3");
     else
         return document.querySelector(".colLabel.col3");
 }
@@ -467,9 +471,38 @@ function refreshUrl () {
     addColLabelstoUrl();
 }
 
+function readUrlParams () {
+    const rowParams = pageUrl.searchParams.getAll("row");
+    const colParams = pageUrl.searchParams.getAll("col");
+    console.log("row params = ", rowParams);
+    console.log("col params = ", colParams);
+
+    let paramValidity = false;
+    if (rowParams.length === 3 && colParams.length === 3)
+        paramValidity = true;
+
+    return [rowParams, colParams, paramValidity];
+}
+
+function setLabelsFromUrl () {
+    const params = readUrlParams();
+    let rowParams = params[0];
+    let colParams = params[1];
+    let paramsValid = params[2];
+
+    if (paramsValid) {
+        for (let i = 1; i < 4; i++) {
+            const rowLabel = getRowLabel(i);
+            const colLabel = getColLabel(i);
+
+            rowLabel.textContent = rowParams[i - 1];
+            colLabel.textContent = colParams[i - 1];
+        }
+    }
+}
 
 const urlBtn = document.querySelector("#urlBtn");
-urlBtn.addEventListener("click", refreshUrl);
+urlBtn.addEventListener("click", setLabelsFromUrl);
 
 // Given a DOM element (a row or col label element), get user input, then search
 // anilist for a studio with the given name, and set the label text content 
@@ -548,3 +581,5 @@ for (let i = 0; i < labels.length; i++) {
             e.target.removeChild(selectCon);
     });
 }
+
+setLabelsFromUrl();
