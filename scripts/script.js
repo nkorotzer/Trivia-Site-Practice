@@ -142,12 +142,6 @@ async function searchAnimeByString (input) {
         .catch(handleError);
 }
 
-const studioBtn = document.querySelector("#studioBtn");
-studioBtn.addEventListener("click", function () {
-    let input = prompt("Enter studio name");
-    searchStudioByString(input);
-})
-
 async function searchStudioByString (input) {
     // Here we define our query as a multi-line string
     // Storing it in a separate .graphql/.gql file is also possible
