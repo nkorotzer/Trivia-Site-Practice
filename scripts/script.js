@@ -490,7 +490,8 @@ function setLabelStudio (labelElem) {
 
 function setLabelYear (labelElem) {
     const userInput = prompt("Enter year");
-    labelElem.textContent = userInput;
+    if (userInput)
+        labelElem.textContent = userInput;
 }
 
 function addHoverHighlighting (elem) {
